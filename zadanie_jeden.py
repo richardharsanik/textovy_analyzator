@@ -31,54 +31,58 @@ if username in uzivatelia:
     if password == registrovany_uzivatelia[username]:
         print(f"{oddelovac}\nWelcome to the app, {username}\nWe have 3 texts to be analyzed\n{oddelovac}")
 
-        volba = int(input("Enter a number btw. 1 and 3 to select: "))
+        volba = input("Enter a number btw. 1 and 3 to select: ")
+        if volba.isdigit():
 
-        vybrane_cislo = akcie[volba]
+            volba = int(volba)
 
-        slova = vybrane_cislo.split()
+            if volba in akcie.keys(): 
 
-        pocet_slov = sum(1 for i in slova )
+                vybrane_cislo = akcie[volba]
 
-        titlcase_words_sum = sum(1 for i in slova if i[0].isupper())
+                slova = vybrane_cislo.split()
 
-        upper_case = sum(1 for i in slova if i.isupper() and not i[0].isnumeric())
+                pocet_slov = sum(1 for i in slova )
 
-        lowercase = sum(1 for i in slova if i[0].islower())
+                titlcase_words_sum = sum(1 for i in slova if i[0].isupper())
 
-        numeric = sum(1 for i in slova if i[0].isnumeric() and i[-1].isnumeric())
+                upper_case = sum(1 for i in slova if i.isupper() and not i[0].isnumeric())
 
-        sum = sum(int(s) for s in slova if s.isnumeric())
+                lowercase = sum(1 for i in slova if i[0].islower())
 
-        dlzky_slov = {}
+                numeric = sum(1 for i in slova if i[0].isnumeric() and i[-1].isnumeric())
 
-        for a in slova:
-            if len(a) in dlzky_slov:
-                dlzky_slov[len(a)] += 1
+                sum = sum(int(s) for s in slova if s.isnumeric())
+
+                dlzky_slov = {}
+
+                for a in slova:
+                    if len(a) in dlzky_slov:
+                        dlzky_slov[len(a)] += 1
+                    else:
+                        dlzky_slov[len(a)] = 1
+
+
+                if volba in akcie.keys():
+                    print(f"There are {pocet_slov} words in the selected text.")
+                    print(f"There are {titlcase_words_sum} titlecase words.")
+                    print(f"There are {upper_case} uppercase words.")
+                    print(f"There are {lowercase} lowercase words.")
+                    print(f"There are {numeric} numeric strings.")
+                    print(f"The sum of all numbers {sum}")
+                    print(oddelovac)
+
+                    total = 0 
+
+                    for dlzka in sorted(dlzky_slov):
+                        pocet = dlzky_slov[dlzka]
+                        total =+  pocet 
+                        print("{:<3}|{:<16}|{:<3}".format(dlzka, '*' * pocet, pocet))
+
             else:
-                dlzky_slov[len(a)] = 1
-
-
-        if volba in akcie.keys():
-            print(f"There are {pocet_slov} words in the selected text.")
-            print(f"There are {titlcase_words_sum} words in the selected text.")
-            print(f"There are {upper_case} words in the selected text.")
-            print(f"There are {lowercase} words in the selected text.")
-            print(f"There are {numeric} words in the selected text.")
-            print(f"There are {sum} words in the selected text.")
-            print(oddelovac)
-
-            for dlzka in sorted(dlzky_slov):
-                pocet = dlzky_slov[dlzka]
-                print(f"{dlzka}| {'*' * pocet} {pocet}")
-        else:
-            print("Numer unavailable")
-            quit()
+                if volba not in akcie.keys():
+                    print(f"Numer {volba} unavailable")
     else:
-        print("wrong password")
-        quit()    
-        
+        print("wrong password")  
 else:
     print("unregistered user, terminating the program..")
-    quit()
-
-
