@@ -38,7 +38,7 @@ if username in uzivatelia:
 
             if volba in akcie.keys(): 
 
-                vybrane_cislo = akcie[volba].strip(",.-='")
+                vybrane_cislo = akcie[volba].replace(",","").replace(".","").replace("-","")
 
                 slova = vybrane_cislo.split()
 
