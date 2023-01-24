@@ -4,7 +4,7 @@
 # email: richard.harsanik@gmail.com
 # discord: nakazeny#6042
 # """
-#comment
+
 
 from task_template  import TEXTS
 
